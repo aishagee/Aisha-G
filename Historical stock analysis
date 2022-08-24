@@ -1,0 +1,125 @@
+--------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_76/3991878506.py in <module>
+----> 1 make_graph (gme_data, gme_revenue,'GameStop')
+
+/tmp/ipykernel_76/2068038883.py in make_graph(stock_data, revenue_data, stock)
+      4     revenue_data_specific = revenue_data[revenue_data.Date <= '2021-04-30']
+      5     fig.add_trace(go.Scatter(x=pd.to_datetime(stock_data_specific.Date, infer_datetime_format=True), y=stock_data_specific.Close.astype("float"), name="Share Price"), row=1, col=1)
+----> 6     fig.add_trace(go.Scatter(x=pd.to_datetime(revenue_data_specific.Date, infer_datetime_format=True), y=revenue_data_specific.Revenue.astype("float"), name="Revenue"), row=2, col=1)
+      7     fig.update_xaxes(title_text="Date", row=1, col=1)
+      8     fig.update_xaxes(title_text="Date", row=2, col=1)
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/generic.py in astype(self, dtype, copy, errors)
+   5813         else:
+   5814             # else, only a single dtype is given
+-> 5815             new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+   5816             return self._constructor(new_data).__finalize__(self, method="astype")
+   5817 
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/internals/managers.py in astype(self, dtype, copy, errors)
+    416 
+    417     def astype(self: T, dtype, copy: bool = False, errors: str = "raise") -> T:
+--> 418         return self.apply("astype", dtype=dtype, copy=copy, errors=errors)
+    419 
+    420     def convert(
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/internals/managers.py in apply(self, f, align_keys, ignore_failures, **kwargs)
+    325                     applied = b.apply(f, **kwargs)
+    326                 else:
+--> 327                     applied = getattr(b, f)(**kwargs)
+    328             except (TypeError, NotImplementedError):
+    329                 if not ignore_failures:
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/internals/blocks.py in astype(self, dtype, copy, errors)
+    589         values = self.values
+    590 
+--> 591         new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+    592 
+    593         new_values = maybe_coerce_values(new_values)
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/dtypes/cast.py in astype_array_safe(values, dtype, copy, errors)
+   1307 
+   1308     try:
+-> 1309         new_values = astype_array(values, dtype, copy=copy)
+   1310     except (ValueError, TypeError):
+   1311         # e.g. astype_nansafe can fail on object-dtype of strings
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/dtypes/cast.py in astype_array(values, dtype, copy)
+   1255 
+   1256     else:
+-> 1257         values = astype_nansafe(values, dtype, copy=copy)
+   1258 
+   1259     # in pandas we don't store numpy str dtypes, so convert to object
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/dtypes/cast.py in astype_nansafe(arr, dtype, copy, skipna)
+   1199     if copy or is_object_dtype(arr.dtype) or is_object_dtype(dtype):
+   1200         # Explicit copy, or required since NumPy can't view from / to object.
+-> 1201         return arr.astype(dtype, copy=True)
+   1202 
+   1203     return arr.astype(dtype, copy=copy)
+
+ValueError: could not convert string to float: 
+make_graph (gme_data, gme_revenue,'GameStop')
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+/tmp/ipykernel_76/3991878506.py in <module>
+----> 1 make_graph (gme_data, gme_revenue,'GameStop')
+
+/tmp/ipykernel_76/2068038883.py in make_graph(stock_data, revenue_data, stock)
+      4     revenue_data_specific = revenue_data[revenue_data.Date <= '2021-04-30']
+      5     fig.add_trace(go.Scatter(x=pd.to_datetime(stock_data_specific.Date, infer_datetime_format=True), y=stock_data_specific.Close.astype("float"), name="Share Price"), row=1, col=1)
+----> 6     fig.add_trace(go.Scatter(x=pd.to_datetime(revenue_data_specific.Date, infer_datetime_format=True), y=revenue_data_specific.Revenue.astype("float"), name="Revenue"), row=2, col=1)
+      7     fig.update_xaxes(title_text="Date", row=1, col=1)
+      8     fig.update_xaxes(title_text="Date", row=2, col=1)
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/generic.py in astype(self, dtype, copy, errors)
+   5813         else:
+   5814             # else, only a single dtype is given
+-> 5815             new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+   5816             return self._constructor(new_data).__finalize__(self, method="astype")
+   5817 
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/internals/managers.py in astype(self, dtype, copy, errors)
+    416 
+    417     def astype(self: T, dtype, copy: bool = False, errors: str = "raise") -> T:
+--> 418         return self.apply("astype", dtype=dtype, copy=copy, errors=errors)
+    419 
+    420     def convert(
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/internals/managers.py in apply(self, f, align_keys, ignore_failures, **kwargs)
+    325                     applied = b.apply(f, **kwargs)
+    326                 else:
+--> 327                     applied = getattr(b, f)(**kwargs)
+    328             except (TypeError, NotImplementedError):
+    329                 if not ignore_failures:
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/internals/blocks.py in astype(self, dtype, copy, errors)
+    589         values = self.values
+    590 
+--> 591         new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+    592 
+    593         new_values = maybe_coerce_values(new_values)
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/dtypes/cast.py in astype_array_safe(values, dtype, copy, errors)
+   1307 
+   1308     try:
+-> 1309         new_values = astype_array(values, dtype, copy=copy)
+   1310     except (ValueError, TypeError):
+   1311         # e.g. astype_nansafe can fail on object-dtype of strings
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/dtypes/cast.py in astype_array(values, dtype, copy)
+   1255 
+   1256     else:
+-> 1257         values = astype_nansafe(values, dtype, copy=copy)
+   1258 
+   1259     # in pandas we don't store numpy str dtypes, so convert to object
+
+~/conda/envs/python/lib/python3.7/site-packages/pandas/core/dtypes/cast.py in astype_nansafe(arr, dtype, copy, skipna)
+   1199     if copy or is_object_dtype(arr.dtype) or is_object_dtype(dtype):
+   1200         # Explicit copy, or required since NumPy can't view from / to object.
+-> 1201         return arr.astype(dtype, copy=True)
+   1202 
+   1203     return arr.astype(dtype, copy=copy)
+
+ValueError: could not convert string to float: 
